@@ -5,6 +5,7 @@ namespace EmployeeDirectoryNET20
     public class Employee
     {
        
+       
         public string Name { get; }
         public int Salary { get; }
 
