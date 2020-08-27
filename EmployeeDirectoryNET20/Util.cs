@@ -24,5 +24,22 @@ namespace EmployeeDirectoryNET20
            
             return answer;
         }
+
+        internal static int AskForInt(string promt)
+        {
+            bool success = false;
+            int answer;
+
+            do
+            {
+                string input = AskForString(promt);
+
+                success = int.TryParse(input, out answer);
+                if (!success) Console.WriteLine("Wrong format");
+
+            } while (!success);
+
+            return answer; 
+        }
     }
 }

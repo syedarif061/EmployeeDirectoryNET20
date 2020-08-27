@@ -9,33 +9,88 @@ namespace EmployeeDirectoryNET20
         
         static void Main(string[] args)
         {
-            
-            SeeData();
+           
+
+            SeedData();
 
             Console.WriteLine("Add a new Employee, Quit with Q");
 
             do
             {
                 string name = Util.AskForString("Name: ");
+                if (name == "Q") break;
+                int salary = Util.AskForInt("Salary: ");
+                PrintMeny();
 
             } while (true);
+        }
 
+        private static void PrintMeny()
+        {
+            Console.WriteLine("1. Add new Employee");
+            Console.WriteLine("2. Print");
+            Console.WriteLine("Q. Quit");
 
-            Employee[] employees = payroll.GetEmployees();
-
-            foreach (Employee  employee in employees)
+            switch (Console.ReadLine())
             {
-                Console.WriteLine(employee);
+                case "1":
+                    Add();
+                    break;
+                case "2":
+                    Print();
+                    break;
+                case "Q":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    break;
             }
         }
-        private static void SeeData()
+
+        private static void Print()
         {
-            payroll.AddEmployee("Kalle",10000);
-            payroll.AddEmployee("Nisse",30000);
-            payroll.AddEmployee("Lisa",23000);
-            payroll.AddEmployee("Anne",50000);
-             
-            
+            Employee[] employees = payroll.GetEmployees();
+
+            foreach (Employee employee in employees)
+            {
+                Console.WriteLine(employee);
+
+                Console.WriteLine(employee.SalaryLevel.Equals(SalaryLevel.Junior) ?
+                    DoJuniorWork() :
+                    DoSeniorWork());
+            }
+        }
+
+        private static string DoSeniorWork()
+        {
+            return "Do senior work";
+        }
+
+        private static string DoJuniorWork()
+        {
+            return "Do junior work";
+        }
+
+        private static void Add()
+        {
+            Console.WriteLine("Add a new Employee, Quit with Q");
+
+            do
+            {
+                string name = Util.AskForString("Name: ");
+                if (name == "Q") break;
+                int salary = Util.AskForInt("Salary: ");
+                payroll.AddEmployee(name, salary);
+
+            } while (true);
+        }
+
+        private static void SeedData()
+        {
+            payroll.AddEmployee("Kalle", 10000);
+            payroll.AddEmployee("Nisse", 30000);
+            payroll.AddEmployee("Lisa", 23000);
+            payroll.AddEmployee("Anne", 50000);
         }
     }
-} 
+}
