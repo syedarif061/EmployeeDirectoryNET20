@@ -17,7 +17,6 @@ namespace EmployeeDirectoryNET20
             foreach (Employee  employee in employees)
             {
                 Console.WriteLine(employee);
-                Console.WriteLine($"Name: {employee.Name} Salary: {employee.Salary}"); 
             }
         }
         private static void SeeData()
